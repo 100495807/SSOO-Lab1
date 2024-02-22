@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	char buff[PATH_MAX]; // Buffer to save the directory
 	switch (argc){
 		case 1:
-			/* no argument provided, use current directory */
+			/* si no se le pasa ningun argumento, usa directorio actual */
 			getcwd(buff, PATH_MAX); // note to self: on buff[n], buff serves as the pointer
 			if (buff == NULL){
 				printf("ERROR: Could not find current pathname.");
@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
 	MAIN LOOP
 	--- */
 
-	DIR *dirp = opendir(buff); // Directory pointer
+	DIR *dirp = opendir(buff); // puntero del directorio
 	if (dirp == NULL){
-		printf("ERROR: Failed to open directory");
+		printf("ERROR: Fallo al abrir el directorio");
 		return -1;
 	}
 
