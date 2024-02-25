@@ -9,56 +9,42 @@
 
 int main(int argc, char *argv[])
 {
-	/* ---
-	SETTING DIRECTORY
-	--- */
+	//buscamos el directorio
 
-	char buff[PATH_MAX]; // Buffer to save the directory
+	char buff[PATH_MAX]; // buffer para guardar el directorio
 	switch (argc){
 		case 1:
-			/* si no se le pasa ningun argumento, usa directorio actual */
-			getcwd(buff, PATH_MAX); // note to self: on buff[n], buff serves as the pointer
+			// si no se le pasa ningun argumento, usa directorio actual
+			getcwd(buff, PATH_MAX);
 			if (buff == NULL){
-				printf("ERROR: Could not find current pathname.");
+				printf("No se pudo encontrar el directorio\n");
 				return -1;
 			}
 			break;
 		case 2:
-			strcpy(buff, argv[1]);
+			strcpy(buff, argv[1]);     // copia en buff el argumento de argv[1]
 			break;
 		default:
-			/* too many arguments */
-			printf("ERROR: Too many arguments.\n");
+			printf("Demasiados argumento\n");
 			return -1;
 	}
 
-	/* ---
-	MAIN LOOP
-	--- */
+	//bucle para ir leyendo
 
-	DIR *dirp = opendir(buff); // puntero del directorio
-	if (dirp == NULL){
-		printf("ERROR: Fallo al abrir el directorio");
+	DIR *dir = opendir(buff); // puntero del directorio
+	if (NULL == dir){
+		printf("Fallo al abrir el directorio");
 		return -1;
 	}
 
-	struct dirent *current;
-	int errno = 0; // error number "returned" from readdir(). If != 0, an error has ocurred
-	while ((current = readdir(dirp)) != NULL){
-		printf("%s\n", current->d_name); // using "->" instead of "." bc 'current' is a pointer
+	struct dirent *actual;
+	while ((actual = readdir(dir)) != NULL){
+		printf("%s\n", actual->d_name); // se usa la flecha en vez del punto por que current es un punteroy
 	}
 
-	if (errno != 0){
-		/* NULL has been returned, because of an error */
-		printf("ERROR: Failed to read from the directory. Error No. %i", errno);
-		return -1;
-	}
+	//cerrar el directorio
 
-	/* ---
-	CLOSE
-	--- */
-
-	closedir(dirp);
+	closedir(dir);
 
 	return 0;
 }
