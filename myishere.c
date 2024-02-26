@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
 		printf("File %s is not in directory %s\n", argv[2], argv[1]);
 	}
 	
+	closedir(dir);
 
 	return 0;
 }
