@@ -10,9 +10,12 @@
 int main(int argc, char *argv[])
 {
 	/*If less than two arguments (argv[0] -> program, argv[1] -> file to process) print an error y return -1*/
-	if(argc < 2)
+	if(argc!= 2)
 	{
-		printf("Faltan argumentos\n");
+		if (argc<2){
+			printf("Too few arguments\n");}
+		if (argc>2){
+			printf("Too many arguments\n");}
 		return -1;
 	}
 
