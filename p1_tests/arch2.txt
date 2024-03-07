@@ -1,0 +1,10 @@
+¡Hola! ¿Cómo estás?
+
+Este archivo contiene caracteres especiales como:
+
+* ¡
+* ?
+* ¿
+* ¡
+
+También se puede usar para probar la función wc.
