@@ -1,121 +1,55 @@
 //P1-SSOO-23/24
 
-#include <fcntl.h>
-
-#include <unistd.h>
-
 #include <stdio.h>
-
-#define SIZE 1
-
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 
 int main(int argc, char *argv[])
-
 {
-
 	/*If less than two arguments (argv[0] -> program, argv[1] -> file to process) print an error y return -1*/
-
-	if(argc!= 2)
-
+	if(argc < 2)
 	{
-
-		if (argc<2){
-
-			printf("Too few arguments\n");}
-
-		if (argc>2){
-
-			printf("Too many arguments\n");}
-
+		printf("Faltan argumentos\n");
 		return -1;
-
 	}
 
-	/*declaramos variables*/
-
-	int fich = 0;
-
-	int numlin=0, numword=0, numbytes=0;
-
-	int n = 0;
-
-	char buffer[SIZE], car_ant= 0;
-
-	int inicio = 1;
-
+	int fd1;
+	int contador_palabra = 0;
+	int contador_linea = 0;
+	int contador_byte = 0;
 	
+	fd1 = open(argv[1], O_RDONLY);
 
-	if ((fich = open(argv[1], O_RDONLY))< 0){
-
-		return -2;
-
+	if (fd1 < 0){
+		printf("no se puede abrir el fichero %s", argv[1]);
+		return -1;
 	}
 
-	while ((n =read(fich, buffer, SIZE)) > 0){
+	char ch;
+	char ant;
 
-		numbytes++;
+	while(read(fd1, &ch, 1) > 0){
+        contador_byte++;
+		ant = ch;
+        if ((ch == ' ') | (ch == '\t') | (ch == '\n')){
+            contador_palabra++;
+        }
 
-		if (buffer[0] == ' '){
-
-			if ((car_ant != '\n')&(car_ant != '\t')&(car_ant != ' ')&(inicio== 0)){
-
-				numword ++;}
-
-			inicio=0;
-
-		}
-
-		if (buffer[0] == '\t'){
-
-			if ((car_ant != '\n')&(car_ant != '\t')&(car_ant != ' ')&(inicio== 0)){
-
-				numword ++;}
-
-			inicio=0;
-
-		}
-
-		if (buffer[0] == '\n'){
-
-			if ((car_ant != '\n')&(car_ant != '\t')&(car_ant != ' ')&(inicio== 0)){
-
-				numword ++;}
-
-			numlin++;
-
-		}
-
-		if ((buffer[0] != '\n')&(buffer[0] != '\t')&(buffer[0] != ' ')){
-
-			if (inicio==1){
-
-				inicio =0;
-
-				numword = 1;}
-
-			if(numword==0){
-
-				numword++;}
-
-		}
-
-		car_ant=buffer[0];
-
-	}
-
-	/*error cierre fichero*/
-
-	if ((n = close(fich))<0){
-
-		return -3;}
-
+        if (ch == '\n'){
+            contador_linea++;
+        }
 		
 
-	printf("%d %d %d %s\n", numlin, numword, numbytes, argv[1]);
+	}
+	if ((ant != ' ') | (ant != '\t') | (ant != '\n')){
+		contador_palabra++;
+	}
 
+    close(fd1);
+
+    printf("%d %d %d %s\n", contador_linea, contador_palabra, contador_byte, argv[1]);
 	return 0;
-
-	
-
 }
