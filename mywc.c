@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		if (argc<2){
 			printf("Too few arguments\n");}
 		if (argc>2){
-			printf("Too many arguments\n");}ºººººº
+			printf("Too many arguments\n");}
 		return -1;
 	}
 	/*declaramos las variables*/
