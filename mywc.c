@@ -9,50 +9,43 @@
 
 int main(int argc, char *argv[])
 {
-	/*If less than two arguments (argv[0] -> program, argv[1] -> file to process) print an error y return -1*/
+	/*cuando haya unn número de elementos diferente a 2 devolver un error y return -1*/
 	if(argc!= 2)
 	{
 		if (argc<2){
 			printf("Too few arguments\n");}
 		if (argc>2){
-			printf("Too many arguments\n");}
+			printf("Too many arguments\n");}ºººººº
 		return -1;
 	}
-
+	/*declaramos las variables*/
 	int fd1;
 	int contador_palabra = 0;
 	int contador_linea = 0;
 	int contador_byte = 0;
 	
 	fd1 = open(argv[1], O_RDONLY);
-
 	if (fd1 < 0){
 		printf("no se puede abrir el fichero %s", argv[1]);
 		return -1;
 	}
-
 	char ch;
 	char ant;
-
-	while(read(fd1, &ch, 1) > 0){
-        contador_byte++;
+	while(read(fd1, &ch, 1) > 0){			 /*creamos bucle que realice el conteo de lineas palabras y bytes, mientras que siga habiendo caracteres seguir el bucle*/
+        contador_byte++; 					/*en cualquier caso se sumara los bytes*/
 		ant = ch;
-        if ((ch == ' ') | (ch == '\t') | (ch == '\n')){
+        if ((ch == ' ') | (ch == '\t') | (ch == '\n')){ /*si el char es un espacio, tabulador o salto de linea añades una palabra*/
             contador_palabra++;
         }
 
         if (ch == '\n'){
-            contador_linea++;
+            contador_linea++; 				/*si hay un salto de linea se añade una linea*/
         }
-		
-
 	}
 	if ((ant != ' ') | (ant != '\t') | (ant != '\n')){
 		contador_palabra++;
 	}
-
-    close(fd1);
-
+    close(fd1);								/*cerramos el fichero e immprimimos el resultado por pantalla*/
     printf("%d %d %d %s\n", contador_linea, contador_palabra, contador_byte, argv[1]);
 	return 0;
 }
