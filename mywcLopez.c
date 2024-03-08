@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
 {
 
-	/*If less than two arguments (argv[0] -> program, argv[1] -> file to process) print an error y return -1*/
+	/*si hay mas o menos elementos que 2, devolver un error y return -1*/
 
 	if(argc!= 2)
 
