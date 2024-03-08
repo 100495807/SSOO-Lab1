@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
 	while(read(fd1, &ch, 1) > 0){			 /*creamos bucle que realice el conteo de lineas palabras y bytes, mientras que siga habiendo caracteres seguir el bucle*/
         contador_byte++; 					/*en cualquier caso se sumara los bytes*/
-		ant = ch;							//guardamos el valor actual en anterior
+						//guardamos el valor actual en anterior
         if ((ch == ' ') | (ch == '\t') | (ch == '\n')){ /*si el char es un espacio, tabulador o salto de linea añades una palabra*/
             contador_palabra++;
         }
