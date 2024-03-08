@@ -21,14 +21,16 @@ int main(int argc, char *argv[])
 	int contador_palabra = 0;
 	int contador_linea = 0;
 	int contador_byte = 0;
+	char ch;								//declaramos una variable para almacenar el caracter actual
+	char ant;								//declaramos una variable para almacenar el caracter anterior
+	
 	/*comprobamos q se abra el fichero*/
 	fd1 = open(argv[1], O_RDONLY);
 	if (fd1 < 0){
 		printf("no se puede abrir el fichero %s", argv[1]);
 		return -1;
 	}
-	char ch;								//declaramos una variable para almacenar el caracter actual
-	char ant;								//declaramos una variable para almacenar el caracter anterior
+
 	while(read(fd1, &ch, 1) > 0){			 /*creamos bucle que realice el conteo de lineas palabras y bytes, mientras que siga habiendo caracteres seguir el bucle*/
         contador_byte++; 					/*en cualquier caso se sumara los bytes*/
 		ant = ch;							//guardamos el valor actual en anterior
