@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
 	int contador_linea = 0;
 	int contador_byte = 0;
 	char ch;								//declaramos una variable para almacenar el caracter actual
-	char ant;								//declaramos una variable para almacenar el caracter anterior
 	
 	/*comprobamos q se abra el fichero*/
 	fd1 = open(argv[1], O_RDONLY);
@@ -42,10 +41,6 @@ int main(int argc, char *argv[])
             contador_linea++; 				/*si hay un salto de linea se añade una linea*/
         }
 	}
-	if ((ant != ' ') | (ant != '\t') | (ant != '\n')){				//si el valor ha sido distinto de ' ', \n o \t sumamos una palabra. Esto es una mejora de codigo no indicada en la practica
-		contador_palabra++;
-	}
-
 
 	if (contador_byte==0){											//si el archivo esta vacio establecemos el contador de palabras a 0 y asi no cuente 1
 		contador_palabra = 0;
