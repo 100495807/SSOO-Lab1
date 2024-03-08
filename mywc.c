@@ -5,8 +5,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-
-
 int main(int argc, char *argv[])
 {
 	/*cuando haya unn número de elementos diferente a 2 devolver un error y return -1*/
@@ -23,7 +21,7 @@ int main(int argc, char *argv[])
 	int contador_palabra = 0;
 	int contador_linea = 0;
 	int contador_byte = 0;
-	
+	/*comprobamos q se abra el fichero*/
 	fd1 = open(argv[1], O_RDONLY);
 	if (fd1 < 0){
 		printf("no se puede abrir el fichero %s", argv[1]);
