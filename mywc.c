@@ -27,11 +27,11 @@ int main(int argc, char *argv[])
 		printf("no se puede abrir el fichero %s", argv[1]);
 		return -1;
 	}
-	char ch;
-	char ant;
+	char ch;								//declaramos una variable para almacenar el caracter actual
+	char ant;								//declaramos una variable para almacenar el caracter anterior
 	while(read(fd1, &ch, 1) > 0){			 /*creamos bucle que realice el conteo de lineas palabras y bytes, mientras que siga habiendo caracteres seguir el bucle*/
         contador_byte++; 					/*en cualquier caso se sumara los bytes*/
-		ant = ch;
+		ant = ch;							//guardamos el valor actual en anterior
         if ((ch == ' ') | (ch == '\t') | (ch == '\n')){ /*si el char es un espacio, tabulador o salto de linea añades una palabra*/
             contador_palabra++;
         }
@@ -40,9 +40,15 @@ int main(int argc, char *argv[])
             contador_linea++; 				/*si hay un salto de linea se añade una linea*/
         }
 	}
-	if ((ant != ' ') | (ant != '\t') | (ant != '\n')){
+	if ((ant != ' ') | (ant != '\t') | (ant != '\n')){				//si el valor ha sido distinto de ' ', \n o \t sumamos una palabra. Esto es una mejora de codigo no indicada en la practica
 		contador_palabra++;
 	}
+
+
+	if (contador_byte==0){											//si el archivo esta vacio establecemos el contador de palabras a 0 y asi no cuente 1
+		contador_palabra = 0;
+	}
+
     close(fd1);								/*cerramos el fichero e immprimimos el resultado por pantalla*/
     printf("%d %d %d %s\n", contador_linea, contador_palabra, contador_byte, argv[1]);
 	return 0;
