@@ -41,13 +41,13 @@ int no_esta=1;						//establecemo una variable para ver si esta o no esta el arc
 	struct dirent *actual;							
 	while ((actual = readdir(dir)) != NULL){					//vamos leyendo el directorio 1 a 1
 		 if (strcmp(actual->d_name, argv[2]) == 0) {			//si el archivo es igual al que buscamos decimo que se ha encontrado, la variable no_esta cambia su valor a 0 y salimos del bucle
-            printf("File %s is in directory %s\n", argv[2], argv[1]);
+            printf("El archivo %s esta en el directorio %s\n", argv[2], argv[1]);
             no_esta = 0;
             break;
 		}
 	}
 	if (no_esta == 1){														//si no_esta se ha mantenido a 1 significa que no estaba el archivo e imprimimos que no esta
-		printf("File %s is not in directory %s\n", argv[2], argv[1]);
+		printf("El archivo %s esta en el directorio %s\n", argv[2], argv[1]);
 	}
 	
 	//cerramos el directorio
